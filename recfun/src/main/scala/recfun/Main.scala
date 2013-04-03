@@ -26,19 +26,15 @@ object Main {
 
         def balanced(p_openCount: Int, chars: List[Char]): Boolean = {
             if (0 > p_openCount) false
+            else if (chars.isEmpty) 0 == p_openCount
             else {
-                if (true == chars.isEmpty)
-                    if (0 == p_openCount) true
-                    else false
-                else {
-                    val currentChar: Char = chars.head
-                    if (')' == currentChar)
-                        balanced(p_openCount - 1, chars.tail)
-                    else if ('(' == currentChar)
-                        balanced(p_openCount + 1, chars.tail)
-                    else
-                        balanced(p_openCount, chars.tail)
-                }
+                val currentChar: Char = chars.head
+                if (')' == currentChar)
+                    balanced(p_openCount - 1, chars.tail)
+                else if ('(' == currentChar)
+                    balanced(p_openCount + 1, chars.tail)
+                else
+                    balanced(p_openCount, chars.tail)
             }
         }
 
@@ -49,6 +45,24 @@ object Main {
      * Exercise 3
      */
     def countChange(money: Int, coins: List[Int]): Int = {
-        0
+        
+        def checkCombination(p_destMoney: Int, p_coins: List[Int]): Int = {
+            if ((0 > p_destMoney) || (p_coins.isEmpty)) {
+	            0
+            }
+	        else if (0 == p_destMoney) {
+	            1
+	        }
+	        else {
+	            checkCombination(p_destMoney - p_coins.head, p_coins) +
+	            checkCombination(p_destMoney, p_coins.tail)
+	        }
+        }
+        
+    
+        if ((0 > money) || (coins.isEmpty))
+            0
+        else
+            checkCombination(money - coins.head, coins) + countChange(money, coins.tail)
     }
 }
