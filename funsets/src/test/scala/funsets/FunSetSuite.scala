@@ -86,7 +86,7 @@ class FunSetSuite extends FunSuite {
    * Once you finish your implementation of "singletonSet", exchange the
    * function "ignore" by "test".
    */
-  ignore("singletonSet(1) contains 1") {
+  test("singletonSet(1) contains 1") {
     
     /**
      * We create a new instance of the "TestSets" trait, this gives us access
@@ -98,15 +98,89 @@ class FunSetSuite extends FunSuite {
        * the test fails. This helps identifying which assertion failed.
        */
       assert(contains(s1, 1), "Singleton")
+      assert(contains(s2, 2), "Singleton")
+      assert(contains(s3, 3), "Singleton")
     }
   }
 
-  ignore("union contains all elements") {
+  test("union contains all elements") {
     new TestSets {
       val s = union(s1, s2)
       assert(contains(s, 1), "Union 1")
       assert(contains(s, 2), "Union 2")
       assert(!contains(s, 3), "Union 3")
     }
+  }
+  
+  test("intersection of sets") {
+    new TestSets {
+      val s4 = singletonSet(1)
+      val s = intersect(s1, s4)
+      assert(contains(s, 1), "Intersect 1")
+      assert(!contains(s, 2), "Not Intersect 2")
+      val s5 = intersect(s1, s2)
+      assert(!contains(s5, 1), "Not 1")
+      assert(!contains(s5, 2), "Not 2")
+    }
+  }
+  
+  test("diff elements") {
+    new TestSets {
+      val s = diff(s1, s2)
+      assert(contains(s, 1), "Diff 1")
+      assert(!contains(s, 2), "Diff 2")
+      
+      val s5 = diff(s1, s1)
+      assert(!contains(s5, 1), "Diff 3")
+    }
+  }
+  
+  test("filter") {
+    new TestSets {
+      val s = filter(s1, (x => (1 == x)))
+      assert(contains(s, 1), "Filter 1")
+      assert(!contains(s, 2), "Filter 2")
+      
+      val s5 = filter(s1, s2)
+      assert(!contains(s5, 1), "Filter 3")
+      assert(!contains(s5, 2), "Filter 4")
+    }
+  }
+  
+  test("forall") {
+    new TestSets {
+      assert(forall(s1, s1), "Forall 1")
+      assert(!forall(s1, s2), "Forall 2")
+    }
+  }
+  
+  test("exists") {
+    new TestSets {
+      assert(exists(s1, s1), "Exists 1")
+      assert(!exists(s1, s2), "Exists 2")
+    }
+    
+    val l = List(2, 4, 6)
+    val s1 = (x => l.contains(x))
+    printSet(s1)
+//    assert(exists(s1, s1), "Exists 3")
+    assert(exists(s1, (x => 4 == x)), "Exists 4")
+  }
+  
+  test("map") {
+    new TestSets {
+      val s = map(s1, (x => x + 1))
+      assert(contains(s, 2), "Map 1")
+      assert(!contains(s, 1), "Map 2")
+      
+      val s4 = map(s2, (x => 2 * x))
+      assert(contains(s4, 4), "Map 3")
+    }
+    
+    val l = List(2, 4, 6)
+    val s1 = (x => l.contains(x))
+    val s = map(s1, (x => 2 * x))
+    printSet(s)
+    assert(contains(s, 12), "Map 4")
   }
 }
