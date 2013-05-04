@@ -7,7 +7,7 @@ package com.geminica.fp.week03
  * @author Devil
  *
  */
-class Nil[T] extends List[T] {
+object Nil extends List[Nothing] {
 	def isEmpty: Boolean = true
 	
 	def head: Nothing = throw new NoSuchElementException("Nil.head")

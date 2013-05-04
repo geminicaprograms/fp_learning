@@ -16,10 +16,10 @@ object scratch {
 
     def singleton[T](elem: T) = new Cons[T](elem, new Nil[T])
                                                   //> singleton: [T](elem: T)com.geminica.fp.week03.Cons[T]
-    val intS = singleton[Int](1)                  //> intS  : com.geminica.fp.week03.Cons[Int] = com.geminica.fp.week03.Cons@46c11
-                                                  //| 21e
-    singleton(true)                               //> res2: com.geminica.fp.week03.Cons[Boolean] = com.geminica.fp.week03.Cons@2d8
-                                                  //| c93dc
+    val intS = singleton[Int](1)                  //> intS  : com.geminica.fp.week03.Cons[Int] = com.geminica.fp.week03.Cons@76eb2
+                                                  //| 35
+    singleton(true)                               //> res2: com.geminica.fp.week03.Cons[Boolean] = com.geminica.fp.week03.Cons@747
+                                                  //| 5b962
    	def nth[T](n: Int, list: List[T]): T =
    		if ((0 > n) || (true == list.isEmpty))
    			throw new IndexOutOfBoundsException("out of given list range")
@@ -29,4 +29,7 @@ object scratch {
       	nth(n-1, list.tail)                       //> nth: [T](n: Int, list: com.geminica.fp.week03.List[T])T
       	
     nth(0, intS)                                  //> res3: Int = 1
+    
+    List(1,2)                                     //> res4: com.geminica.fp.week03.List[Int] = com.geminica.fp.week03.Cons@400bdd7
+                                                  //| f
 }
