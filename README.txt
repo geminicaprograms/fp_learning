@@ -1,0 +1,1 @@
+Functional Programming assignments implementation so that it is not dropped
