@@ -1,1 +1,2 @@
 Functional Programming assignments implementation so that it is not dropped branch version plus hotfix ;)
+Additional branch fixes.
