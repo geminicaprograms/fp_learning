@@ -1,1 +1,1 @@
-Functional Programming assignments implementation so that it is not dropped on Master branch
+Functional Programming assignments implementation so that it is not dropped on Master branch plus hotfix
